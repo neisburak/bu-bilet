@@ -1,0 +1,54 @@
+<form asp-controller="Home" asp-action="Index" method="post">
+    <div class="form-item-combined">
+        <div class="form-item">
+            <svg class="form-item-icon" width="30" height="30">
+                <use xlink:href="/icons/sprite.svg#from" />
+            </svg>
+            <div class="form-group">
+                <label for="nereden">Nereden</label>
+                <select id="nereden" class="selectpicker form-control city-from" title="Nereden"
+                    data-live-search="true">
+                    <option value="ankara">Ankara</option>
+                    <option value="istanbul">İstanbul</option>
+                    <option value="izmir">İzmir</option>
+                    <option value="yalova">Yalova</option>
+                    <option value="bursa">Bursa</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-item">
+            <svg class="form-item-icon" width="30" height="30">
+                <use xlink:href="/icons/sprite.svg#to" />
+            </svg>
+            <div class="form-group">
+                <label for="nereye">Nereden</label>
+                <select id="nereye" class="selectpicker form-control city-to" title="Nereye" data-live-search="true">
+                    <option value="ankara">Ankara</option>
+                    <option value="istanbul">İstanbul</option>
+                    <option value="izmir">İzmir</option>
+                    <option value="yalova">Yalova</option>
+                    <option value="bursa">Bursa</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn-switch" type="button">
+            <svg width="30" height="30">
+                <use xlink:href="/icons/sprite.svg#switch" />
+            </svg>
+        </button>
+    </div>
+    <div class="form-item form-item-last">
+        <svg class="form-item-icon icon-date" width="30" height="30">
+            <use xlink:href="/icons/sprite.svg#date" />
+        </svg>
+        <div class="form-group">
+            <label for="tarih">Tarih</label>
+            <input id="tarih" readonly type="text" class="form-control form-date" placeholder="Tarih">
+        </div>
+        <div class="form-item-buttons">
+            <button class="btn btn-sm btn-today" type="button" data-date="today">Bugün</button>
+            <button class="btn btn-sm active btn-tomorrow" type="button" data-date="tomorrow">Yarın</button>
+        </div>
+    </div>
+    <button class="btn btn-primary btn-ticket">Şu Bileti Bul</button>
+</form>

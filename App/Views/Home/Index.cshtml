@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Anasayfa";
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/lib/owl-carousel/dist/assets/owl.carousel.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/owl-carousel/dist/assets/owl.theme.default.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/bootstrap-select/css/bootstrap-select.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" asp-append-version="true" />
+}
+
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <partial name="_Form" />
+            </div>
+            <div class="col-md-6 col-carousel">
+                <partial name="_Carousel" />
+            </div>
+        </div>
+
+        <partial name="_Features" />
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/lib/owl-carousel/dist/owl.carousel.min.js"></script>
+    <script src="~/lib/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <script src="~/lib/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/lib/bootstrap-datepicker/dist/locales/bootstrap-datepicker.tr.min.js"></script>
+}
