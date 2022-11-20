@@ -10,7 +10,7 @@ public static class ServiceRegistrar
 {
     public static IServiceCollection AddBusinessServices(this IServiceCollection services, ApiConfigurationOptions options)
     {
-        return services.AddHttpClient(options).AddDependenciesFromAssembly(Assembly.GetCallingAssembly());
+        return services.AddHttpClient(options).AddDependenciesFromAssembly(Assembly.GetExecutingAssembly());
     }
 
     public static IServiceCollection AddHttpClient(this IServiceCollection services, ApiConfigurationOptions options)

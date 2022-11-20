@@ -1,3 +1,5 @@
+using Business.Utilities.Middlewares;
+
 namespace App.Utilities;
 
 public static class AppConfigurer
@@ -15,6 +17,8 @@ public static class AppConfigurer
         app.UseStaticFiles();
 
         app.UseSession();
+
+        app.UseSessionMiddleware();
 
         app.UseRouting();
 

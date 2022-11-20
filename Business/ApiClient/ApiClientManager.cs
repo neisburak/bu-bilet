@@ -1,9 +1,10 @@
+using System.Text;
 using System.Text.Json;
 using Core.Dependencies;
 
 namespace Business.ApiClient;
 
-public class ApiClientManager : IApiClientService, IScopedDependency
+public class ApiClientManager : IApiClientService, ISingletonDependency
 {
     private readonly HttpClient _httpClient;
 
@@ -14,8 +15,11 @@ public class ApiClientManager : IApiClientService, IScopedDependency
 
     public async Task<TResult> PostAsync<TResult, TParam>(string url, TParam param, CancellationToken cancellationToken = default)
     {
-        var json = JsonSerializer.Serialize(param);
-        var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+        var json = JsonSerializer.Serialize(param, new JsonSerializerOptions
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        });
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
         var response = await _httpClient.PostAsync(url, content, cancellationToken);
         if (response.IsSuccessStatusCode)
         {
@@ -25,7 +29,7 @@ public class ApiClientManager : IApiClientService, IScopedDependency
                 PropertyNameCaseInsensitive = true
             }, cancellationToken);
 
-            if(result is null) throw new Exception($"Response was null from {url}.");
+            if (result is null) throw new Exception($"Response was null from {url}.");
 
             return result;
         }

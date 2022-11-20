@@ -1,4 +1,5 @@
 using Business.Utilities;
+using Business.Utilities.Middlewares;
 using Core.Options;
 
 namespace App.Utilities;
@@ -26,6 +27,8 @@ public static class ServiceRegistrar
         });
 
         builder.Services.AddBusinessServices(apiConfiguration);
+
+        builder.Services.AddSessionMiddleware();
     }
 
     private static ApiConfigurationOptions GetApiConfiguration(this IConfiguration configuration)

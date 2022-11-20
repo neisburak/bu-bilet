@@ -6,6 +6,5 @@ namespace Business.Journey;
 
 public interface IJourneyService
 {
-    IList<JourneyForBus> Get(Param<LocationForJourney> param);
     Task<IList<JourneyForBus>> GetAsync(Param<LocationForJourney> param, CancellationToken cancellationToken = default);
 }
