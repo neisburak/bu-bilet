@@ -1,17 +1,46 @@
+@model IList<Business.Journey.Dto.Result.JourneyForBus>
+@using System.Globalization
 @{
-    ViewData["Title"] = "İzmir - Aydın Otobüs Seferleri";
+    var first = Model.First();
+    ViewData["Title"] = $"{first.OriginLocation} - ${first.DestinationLocation} Otobüs Seferleri";
 }
 
-<partial name="_Header" />
+<header class="journey-header">
+    <div class="container">
+        <div class="journey-details">
+            <div class="detail-group">
+                <div class="detail from">
+                    <svg width="30" height="30">
+                        <use xlink:href="/icons/sprite.svg#from" />
+                    </svg>
+                    @first.Journey.Origin
+                </div>
+
+                <div class="detail to">
+                    <svg width="30" height="30">
+                        <use xlink:href="/icons/sprite.svg#to" />
+                    </svg>
+                    @first.Journey.Destination
+                </div>
+            </div>
+
+            <div class="detail departure">
+                <svg width="30" height="30">
+                    <use xlink:href="/icons/sprite.svg#date" />
+                </svg>
+                @first.Journey.Departure.ToString("dd MMMM yyyy dddd", CultureInfo.CreateSpecificCulture("tr-TR"))
+            </div>
+        </div>
+    </div>
+</header>
 
 <div class="section">
     <div class="container">
         <div class="journeys">
-            <partial name="_Item" />
-            <partial name="_Item" />
-            <partial name="_Item" />
-            <partial name="_Item" />
-            <partial name="_Item" />
+            @foreach (var item in Model)
+            {
+                <partial name="_Item" model="item" />
+            }
         </div>
     </div>
 </div>

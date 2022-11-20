@@ -1,63 +1,80 @@
-﻿function getTomorrow() {
+﻿window.getTomorrow = function () {
   var date = new Date();
   date.setDate(date.getDate() + 1);
   return date;
+};
+
+window.cookie = {
+  names: { prefrences: "Prefrences" },
+  set: function (key, value, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+    let expires = "expires=" + d.toUTCString();
+    document.cookie = key + "=" + value + ";" + expires + ";path=/";
+  },
+  get: function (key) {
+    let name = key + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(";");
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == " ") {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  },
+  remove: function (key) {
+    this.set(key, "", -1);
+  },
+};
+
+window.base64 = {
+  encode: function (str) {
+    return btoa(encodeURIComponent(str));
+  },
+  decode: function (str) {
+    return decodeURIComponent(atob(str));
+  },
+};
+
+window.getFormValues = function (selector) {
+  var values = {};
+  $.each($(selector).serializeArray(), function (i, field) {
+    if (field.name != "__RequestVerificationToken")
+      values[field.name] = field.value;
+  });
+  return values;
+};
+
+window.validateForm = function (values) {
+  for (const [_, value] of Object.entries(values)) {
+    if (value == "" || value == undefined) {
+      return false;
+    }
+  }
+  return true;
+};
+
+function padTo2Digits(num) {
+  return num.toString().padStart(2, "0");
 }
 
-$(function () {
-  // Owl Carousel Initialization
-  if ($(".owl-carousel").length) {
-    $(".owl-carousel").owlCarousel({
-      loop: true,
-      dots: true,
-      items: 1,
-      singleItem: true,
-    });
+window.formatDate = function (date) {
+  return [
+    date.getFullYear(),
+    padTo2Digits(date.getMonth() + 1),
+    padTo2Digits(date.getDate()),
+  ].join("-");
+};
+
+window.getPrefrences = function () {
+  var data = cookie.get(cookie.names.prefrences);
+  if (data) {
+    return JSON.parse(base64.decode(data));
   }
-
-  // Date Picker Initialization
-  if ($(".form-date").length) {
-    var datepicker = $(".form-date")
-      .datepicker({
-        language: "tr",
-        format: "dd MM yyyy DD",
-        startDate: "0",
-        autoclose: true,
-      })
-      .datepicker("setDate", getTomorrow());
-
-    $(".form-item-buttons .btn").click(function () {
-      var el = $(this),
-        data = el.data("date");
-      if (el.hasClass("active")) return;
-
-      el.parent().find(".btn").removeClass("active");
-      el.addClass("active");
-
-      if (data == "today") {
-        datepicker.datepicker("setDate", "now");
-      } else {
-        datepicker.datepicker("setDate", getTomorrow());
-      }
-    });
-  }
-
-  // City Select Initialization
-  if ($(".selectpicker").length) {
-    if (
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)
-    ) {
-      $(".selectpicker").selectpicker("mobile");
-    }
-
-    $(".btn-switch").click(function () {
-      var fromValue = $(".city-from").selectpicker("val"),
-        toValue = $(".city-to").selectpicker("val");
-
-      if (!fromValue || !toValue) return;
-
-      $(".city-from").selectpicker("val", toValue);
-      $(".city-to").selectpicker("val", fromValue);
-    });
-  }
-});
+  return null;
+};

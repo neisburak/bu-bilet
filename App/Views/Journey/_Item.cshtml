@@ -1,40 +1,46 @@
+@model Business.Journey.Dto.Result.JourneyForBus
+
 <div class="journey">
-    <div class="from">
-        <h3 class="journey-title">Kalkış</h3>
-        <div class="journey-detail">
-            <div>
-                <svg class="journey-icon" width="30" height="30">
-                    <use xlink:href="/icons/sprite.svg#route" />
-                </svg>
-                Esenler Otogarı
+    <div class="journey-logo">
+        <partner-logo id="@Model.PartnerId" alt="@Model.PartnerName" />
+    </div>
+    <div class="journey-inner">
+        <div class="from">
+            <h3 class="journey-title">Kalkış</h3>
+            <div class="journey-detail">
+                <div>
+                    <svg class="journey-icon" width="30" height="30">
+                        <use xlink:href="/icons/sprite.svg#route" />
+                    </svg>
+                    @Model.Journey.Origin
+                </div>
+                <div>
+                    <svg class="journey-icon" width="30" height="30">
+                        <use xlink:href="/icons/sprite.svg#time" />
+                    </svg>
+                    @Model.Journey.Departure.ToString("HH:mm")
+                </div>
             </div>
-            <div>
-                <svg class="journey-icon" width="30" height="30">
-                    <use xlink:href="/icons/sprite.svg#time" />
-                </svg>
-                09:30
+        </div>
+        <div class="to">
+            <h3 class="journey-title">Varış</h3>
+            <div class="journey-detail">
+                <div>
+                    <svg class="journey-icon" width="30" height="30">
+                        <use xlink:href="/icons/sprite.svg#route" />
+                    </svg>
+                    @Model.Journey.Destination
+                </div>
+                <div>
+                    <svg class="journey-icon" width="30" height="30">
+                        <use xlink:href="/icons/sprite.svg#time" />
+                    </svg>
+                    @Model.Journey.Arrival.ToString("HH:mm")
+                </div>
             </div>
         </div>
     </div>
-    <div class="to">
-        <h3 class="journey-title">Varış</h3>
-        <div class="journey-detail">
-            <div>
-                <svg class="journey-icon" width="30" height="30">
-                    <use xlink:href="/icons/sprite.svg#route" />
-                </svg>
-                Ankara Aşti Otogarı
-            </div>
-            <div>
-                <svg class="journey-icon" width="30" height="30">
-                    <use xlink:href="/icons/sprite.svg#time" />
-                </svg>
-                15:30
-            </div>
-        </div>
-    </div>
-    <div class="price">
-        <h3 class="journey-title">Fiyat</h3>
-        <div>75.00 TL</div>
+    <div class="journey-price">
+        @Model.Journey.InternetPrice.ToString("0.00") TL
     </div>
 </div>

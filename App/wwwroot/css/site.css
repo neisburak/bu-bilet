@@ -10,6 +10,11 @@ body {
   background-color: #f8f8f8;
 }
 
+img {
+  width: 100%;
+  height: auto;
+}
+
 .navbar {
   background-color: #ba2424;
 }
@@ -349,12 +354,14 @@ body {
 
 .journey {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
   background-color: #fff;
-  color: #333;
+  color: #555;
   padding: 1rem;
   border-radius: 0.4rem;
-  justify-content: space-between;
   border: 1px solid #ededed;
   box-shadow: 0 2px 4px 2px rgba(190, 190, 190, 0.25);
 }
@@ -363,8 +370,29 @@ body {
   margin-top: 1.5rem;
 }
 
-.journey > div + div {
+.journey-logo {
+  max-width: 7.5rem;
+  order: 1;
+  flex: 1 1 50%;
+}
+
+.journey-inner {
+  display: flex;
+  flex: 1 1 100%;
+  flex-direction: column;
+  order: 3;
+}
+
+.journey-inner > div + div {
   margin-top: 0.5rem;
+}
+
+.journey-price {
+  order: 2;
+  flex: 1 1 50%;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-align: right;
 }
 
 .journey-title {
@@ -391,14 +419,6 @@ body {
   fill: #999;
 }
 
-.price {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  font-weight: 500;
-}
-
 @media (min-width: 768px) {
   .section {
     margin: 5rem 0 3rem;
@@ -409,38 +429,58 @@ body {
   }
 
   .journey-details {
-    align-items: center;
     flex-direction: row;
     justify-content: space-between;
   }
 
   .detail-group {
-    justify-content: space-between;
     margin-bottom: 0;
   }
 
   .detail-group .detail + .detail {
-    margin-left: 2.5rem;
+    margin-left: 3rem;
   }
 
-  .journey {
+  .journey-inner {
     flex-direction: row;
+    justify-content: space-between;
   }
 
-  .journey > div + div {
+  .journey-inner > div + div {
     margin-top: 0;
   }
 
-  .journey-title {
-    margin-bottom: 0.5rem;
-  }
-
   .journey-detail > div + div {
-    margin-left: 1rem;
+    margin-left: 1.5rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .journey {
+    flex-flow: row wrap;
+    justify-content: space-between;
+    padding: 1.75rem 1.5rem;
   }
 
-  .price {
-    align-items: flex-start;
-    flex-direction: column;
+  .journey-logo {
+    order: 1;
+    flex: auto;
+    margin-right: 1.5rem;
+  }
+
+  .journey-inner {
+    flex: auto;
+    flex-direction: row;
+    order: 2;
+  }
+
+  .journey-inner > div + div {
+    margin-top: 0;
+  }
+
+  .journey-price {
+    order: 3;
+    flex: auto;
+    text-align: right;
   }
 }

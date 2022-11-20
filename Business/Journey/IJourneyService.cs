@@ -1,10 +1,10 @@
 using Business.Journey.Dto.Param;
 using Business.Journey.Dto.Result;
-using Core.Dto.Param;
+using Core.Dto.Result;
 
 namespace Business.Journey;
 
 public interface IJourneyService
 {
-    Task<IList<JourneyForBus>> GetAsync(Param<LocationForJourney> param, CancellationToken cancellationToken = default);
+    Task<Result<IList<JourneyForBus>>> GetAsync(LocationForJourney journey, CancellationToken cancellationToken = default);
 }

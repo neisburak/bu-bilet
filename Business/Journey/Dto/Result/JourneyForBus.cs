@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Core.Dto;
 
 namespace Business.Journey.Dto.Result;
@@ -5,36 +6,32 @@ namespace Business.Journey.Dto.Result;
 public class JourneyForBus : IDto
 {
     public int Id { get; set; }
+
+    [JsonPropertyName("partner-id")]
     public int PartnerId { get; set; }
+
+    [JsonPropertyName("partner-name")]
     public string PartnerName { get; set; } = default!;
+
+    [JsonPropertyName("route-id")]
     public int RouteId { get; set; }
+
+    [JsonPropertyName("bus-type")]
     public string BusType { get; set; } = default!;
+
+    [JsonPropertyName("bus-type-name")]
     public string BusTypeName { get; set; } = default!;
+
+    [JsonPropertyName("total-seats")]
     public int TotalSeats { get; set; }
+
+    [JsonPropertyName("available-seats")]
     public int AvailableSeats { get; set; }
+
+    [JsonPropertyName("origin-location")]
     public string OriginLocation { get; set; } = default!;
+
+    [JsonPropertyName("destination-location")]
     public string DestinationLocation { get; set; } = default!;
-    public bool IsActive { get; set; }
-    public int OriginLocationId { get; set; }
-    public int DestinationLocationId { get; set; }
-    public bool IsPromoted { get; set; }
-    public int CancellationOffset { get; set; }
-    public bool HasBusShuttle { get; set; }
-    public bool DisableSalesWithoutGovId { get; set; }
-    public string DisplayOffset { get; set; } = default!;
-    public double PartnerRating { get; set; }
-    public bool HasDynamicPricing { get; set; }
-    public bool DisableSalesWithoutHesCode { get; set; }
-    public bool DisableSingleSeatSelection { get; set; }
-    public int ChangeOffset { get; set; }
-    public int Rank { get; set; }
-    public bool DisplayCouponCodeInput { get; set; }
-    public bool DisableSalesWithoutDateOfBirth { get; set; }
-    public int OpenOffset { get; set; }
-    public bool AllowSalesForeignPassenger { get; set; }
-    public bool HasSeatSelection { get; set; }
-    public bool HasGenderSelection { get; set; }
-    public bool HasDynamicCancellation { get; set; }
-    public IList<FeatureForJourney> Features { get; set; } = new List<FeatureForJourney>();
-    public IList<DetailForJourney> Journey { get; set; } = new List<DetailForJourney>();
+    public DetailForJourney Journey { get; set; } = default!;
 }

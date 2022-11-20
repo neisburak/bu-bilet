@@ -1,24 +1,26 @@
+using Business.Journey;
+using Business.Journey.Dto.Param;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App.Controllers;
 
 public class JourneyController : Controller
 {
-    private readonly ILogger<JourneyController> _logger;
+    private readonly IJourneyService _journeyService;
 
-    public JourneyController(ILogger<JourneyController> logger)
+    public JourneyController(IJourneyService journeyService)
     {
-        _logger = logger;
+        _journeyService = journeyService;
     }
 
-    public IActionResult Index()
+    [HttpGet("/seferler/{originId}-{destinationId}/{departure}")]
+    public async Task<IActionResult> Index(int originId, int destinationId, DateTime departure, CancellationToken cancellationToken)
     {
-        return View();
-    }
+        var param = new LocationForJourney { OriginId = originId, DestinationId = destinationId, DepartureDate = departure.ToString("o") };
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View("Error!");
+        var data = await _journeyService.GetAsync(param, cancellationToken);
+
+        if (data.IsSuccess) return View(data.Data);
+        return RedirectToAction("Error", "Home");
     }
 }
