@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Business.Session;
 
-public class SessionManager : ISessionService, ISingletonDependency
+public class SessionManager : ISessionService, IScopedDependency
 {
     private readonly IHttpContextAccessor _contextAccessor;
     private readonly IApiClientService _apiClientService;

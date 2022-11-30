@@ -5,7 +5,7 @@ namespace Business.Utilities.Middlewares;
 
 public static class MiddlewareConfigurer
 {
-    public static IServiceCollection AddSessionMiddleware(this IServiceCollection services) => services.AddSingleton<SessionMiddleware>();
+    public static IServiceCollection AddSessionMiddleware(this IServiceCollection services) => services.AddScoped<SessionMiddleware>();
 
     public static void UseSessionMiddleware(this IApplicationBuilder app) => app.UseMiddleware<SessionMiddleware>();
 

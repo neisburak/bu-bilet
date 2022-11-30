@@ -19,6 +19,13 @@ public class SessionMiddleware : IMiddleware
 
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
+        await SetSession(context).ConfigureAwait(false);
+
+        await next(context);
+    }
+
+    private async Task SetSession(HttpContext context)
+    {
         await context.Session.LoadAsync();
 
         if (!context.Session.Keys.Contains(MiddlewareConstants.SessionName))
@@ -34,8 +41,6 @@ public class SessionMiddleware : IMiddleware
 
             await context.Session.CommitAsync();
         }
-
-        await next(context);
     }
 
     private SessionForSend GetSessionForSend(HttpContext context)
